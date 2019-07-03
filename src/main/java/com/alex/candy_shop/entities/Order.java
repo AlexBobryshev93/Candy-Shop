@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 @Entity
@@ -23,6 +24,9 @@ public class Order {
 
     @ManyToMany(targetEntity = Product.class)
     private List<Product> products = new ArrayList<>();
+
+    @ManyToMany(targetEntity = Product.class) // how to merge 2 transitional tables?
+    private List<Integer> quantities = new ArrayList<>();
 
     @PrePersist
     void createdAt() {
