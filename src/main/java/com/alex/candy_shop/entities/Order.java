@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "orders")
@@ -23,10 +24,10 @@ public class Order {
     private User user;
 
     @ManyToMany(targetEntity = Product.class)
-    private List<Product> products = new ArrayList<>();
+    private Set<Product> products = new HashSet<>();
 
     @ManyToMany(targetEntity = Product.class) // how to merge 2 transitional tables?
-    private List<Integer> quantities = new ArrayList<>();
+    private Set<Integer> quantities = new HashSet<>();
 
     @PrePersist
     void createdAt() {
