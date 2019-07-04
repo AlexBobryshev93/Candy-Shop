@@ -12,5 +12,18 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String name;
-    private float price;
+    private double price;
+
+    public Product() {
+    }
+
+    public Product(String name, double price) {
+        this.name = name;
+        this.price = price;
+    }
+
+    // Two digits (cents) after the decimal point
+    public double getPriceForDisplay() {
+        return Math.round(price * 100) / 100d;
+    }
 }

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>My Candy Shop Online</title>
+</head>
+
+<body>
+<h1>Here is your cart:</h1>
+<table>
+    <tr>
+        <th>Product</th>
+        <th>Quantity</th>
+    </tr>
+    <tr th:each="var : ${order.quantities}">
+        <th></th>
+        <th th:text="${var}"></th>
+    </tr>
+</table>
+</body>
+</html>

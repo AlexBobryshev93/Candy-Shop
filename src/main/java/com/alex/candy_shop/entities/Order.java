@@ -15,7 +15,7 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private float sum;
+    private double sum;
     private LocalDateTime dateTime;
 
     @ManyToOne(fetch = FetchType.LAZY )
@@ -32,4 +32,5 @@ public class Order {
     void createdAt() {
         this.dateTime = LocalDateTime.now();
     }
+
 }
