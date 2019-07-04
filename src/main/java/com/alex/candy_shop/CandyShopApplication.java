@@ -19,11 +19,11 @@ public class CandyShopApplication {
         return new CommandLineRunner() {
             @Override
             public void run(String... args) throws Exception {
-                repo.save(new Product("sneakers", 1.1));
-                repo.save(new Product("twins", 0.75));
-                repo.save(new Product("kidcut", 0.8));
-                repo.save(new Product("bouncy", 0.9));
-                repo.save(new Product("earth", 0.95));
+                repo.save(new Product("sneakers", 1.1, 10));
+                repo.save(new Product("twins", 0.75, 0));
+                repo.save(new Product("kidcut", 0.8, 5));
+                repo.save(new Product("bouncy", 0.9, 59));
+                repo.save(new Product("earth", 0.95, 7));
             }
         };
     } */
