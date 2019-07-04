@@ -22,16 +22,22 @@ public class Order {
     @ManyToOne(fetch = FetchType.LAZY )
     @JoinColumn(name = "user_id")
     private User user;
-
+/*
     @ManyToMany(targetEntity = Product.class)
-    private Set<Product> products = new HashSet<>();
-
+    private List<Product> products = new ArrayList<>();
+*/
     @ManyToMany(targetEntity = Product.class) // how to merge 2 transitional tables?
-    private Set<Integer> quantities = new HashSet<>();
+    private List<Integer> quantities = new ArrayList<>();
 
     @PrePersist
     void createdAt() {
         this.dateTime = LocalDateTime.now();
     }
+/*
+    void calculateSum() {
+        for (int i = 0; i < products.size(); i++) {
+            sum += products.get(i).getPrice() * quantities.get(i);
+        }
+    } */
 
 }
