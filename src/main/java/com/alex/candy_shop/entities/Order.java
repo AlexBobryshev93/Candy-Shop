@@ -26,7 +26,7 @@ public class Order {
     @ManyToMany(targetEntity = Product.class)
     private List<Product> products = new ArrayList<>();
 */
-    @ManyToMany(targetEntity = Product.class) // how to merge 2 transitional tables?
+    @ManyToMany(targetEntity = Product.class) // use this transitional but should be done through product id
     private List<Integer> quantities = new ArrayList<>();
 
     @PrePersist
