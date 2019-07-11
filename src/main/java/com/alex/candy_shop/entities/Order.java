@@ -22,12 +22,9 @@ public class Order {
     @ManyToOne(fetch = FetchType.LAZY )
     @JoinColumn(name = "user_id")
     private User user;
-/*
-    @ManyToMany(targetEntity = Product.class)
-    private List<Product> products = new ArrayList<>();
-*/
-    @ManyToMany(targetEntity = Product.class) // use this transitional but should be done through product id
-    private List<Integer> quantities = new ArrayList<>();
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private OrderDetails orderDetails = new OrderDetails();
 
     @PrePersist
     void createdAt() {

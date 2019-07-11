@@ -12,7 +12,7 @@
         <th>Product</th>
         <th>Quantity</th>
     </tr>
-    <tr th:each="var : ${order.quantities}">
+    <tr th:each="var : ${order.orderDetails.quantities}">
         <th></th>
         <th th:text="${var}"></th>
     </tr>

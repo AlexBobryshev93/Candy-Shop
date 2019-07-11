@@ -10,7 +10,7 @@
 <form method="POST" th:object="${order}">
     <div th:each="product : ${products}">
         <img th:src="${'/images/products/' + product.name + '.png'}" th:alt="${product.name}"/>
-        <input type="number" min="0" th:max="${product.inStock}" th:field="*{quantities}">
+        <input type="number" min="0" th:max="${product.inStock}" th:field="*{orderDetails.quantities}">
         </br>
         <span th:text="${product.name.toUpperCase()}"></span>
         </br>

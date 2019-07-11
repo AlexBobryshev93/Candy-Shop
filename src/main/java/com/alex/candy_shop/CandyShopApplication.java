@@ -1,6 +1,8 @@
 package com.alex.candy_shop;
 
+import com.alex.candy_shop.entities.Order;
 import com.alex.candy_shop.entities.Product;
+import com.alex.candy_shop.repos.OrderRepo;
 import com.alex.candy_shop.repos.ProductRepo;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -13,18 +15,27 @@ public class CandyShopApplication {
     public static void main(String[] args) {
         SpringApplication.run(CandyShopApplication.class, args);
     }
-/*
+
     @Bean
-    public CommandLineRunner dataLoader(ProductRepo repo) {
+    public CommandLineRunner dataLoader(ProductRepo productRepo, OrderRepo orderRepo) {
         return new CommandLineRunner() {
             @Override
             public void run(String... args) throws Exception {
-                repo.save(new Product("sneakers", 1.1, 10));
-                repo.save(new Product("twins", 0.75, 0));
-                repo.save(new Product("kidcut", 0.8, 5));
-                repo.save(new Product("bouncy", 0.9, 59));
-                repo.save(new Product("earth", 0.95, 7));
+                /*
+                Product sneakers = new Product("sneakers", 1.1, 10);
+                Product twins = new Product("twins", 0.75, 0);
+                Product kidcut = new Product("kidcut", 0.8, 5);
+                Product bouncy = new Product("bouncy", 0.9, 59);
+                Product earth = new Product("earth", 0.95, 7);
+                productRepo.save(sneakers);
+                productRepo.save(twins);
+                productRepo.save(kidcut);
+                productRepo.save(bouncy);
+                productRepo.save(earth);
+                */
+
+                //orderRepo.save(new Order());
             }
         };
-    } */
+    }
 }
