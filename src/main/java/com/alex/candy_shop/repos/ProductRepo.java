@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProductRepo extends CrudRepository<Product, Integer> {
+    Product findFirstByName(String name);
 }

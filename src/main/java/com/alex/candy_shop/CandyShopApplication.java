@@ -1,6 +1,7 @@
 package com.alex.candy_shop;
 
 import com.alex.candy_shop.entities.Order;
+import com.alex.candy_shop.entities.OrderItem;
 import com.alex.candy_shop.entities.Product;
 import com.alex.candy_shop.repos.OrderRepo;
 import com.alex.candy_shop.repos.ProductRepo;
@@ -34,7 +35,14 @@ public class CandyShopApplication {
                 productRepo.save(earth);
                 */
 
-                //orderRepo.save(new Order());
+
+                Order order1 = new Order();
+                OrderItem orderItem1 = new OrderItem();
+                orderItem1.setProduct(productRepo.findFirstByName("sneakers"));
+                orderItem1.setQuantity(3);
+                order1.getDetails().getItems().add(orderItem1);
+                orderRepo.save(order1);
+
             }
         };
     }

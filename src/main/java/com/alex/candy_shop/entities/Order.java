@@ -24,11 +24,17 @@ public class Order {
     private User user;
 
     @OneToOne(cascade = CascadeType.ALL)
-    private OrderDetails orderDetails = new OrderDetails();
+    @JoinColumn(name = "order_details_id")
+    private OrderDetails details;
 
     @PrePersist
     void createdAt() {
         this.dateTime = LocalDateTime.now();
+    }
+
+    public Order() {
+        details = new OrderDetails();
+        details.setId(id);
     }
 /*
     void calculateSum() {

@@ -11,9 +11,10 @@ import java.util.List;
 @Data
 public class OrderDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    //@GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "id", fetch = FetchType.EAGER)
     private List<OrderItem> items = new ArrayList<>();
+
 }
