@@ -14,7 +14,7 @@ public class OrderDetails {
     //@GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "id", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderDetails", fetch = FetchType.EAGER)
     private List<OrderItem> items = new ArrayList<>();
 
 }

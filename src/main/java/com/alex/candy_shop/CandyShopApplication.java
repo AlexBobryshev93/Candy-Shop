@@ -33,7 +33,6 @@ public class CandyShopApplication {
                 productRepo.save(kidcut);
                 productRepo.save(bouncy);
                 productRepo.save(earth);
-                */
 
 
                 Order order1 = new Order();
@@ -42,7 +41,7 @@ public class CandyShopApplication {
                 orderItem1.setQuantity(3);
                 order1.getDetails().getItems().add(orderItem1);
                 orderRepo.save(order1);
-
+*/
             }
         };
     }

@@ -12,12 +12,13 @@ public class OrderItem {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @ManyToOne
+    @JoinColumn(name = "orderId")
+    private OrderDetails orderDetails;
+
     @OneToOne
     private Product product;
 
     private int quantity;
 
-    @ManyToOne
-    @JoinColumn(name = "order_id")
-    private OrderDetails orderDetails;
 }
