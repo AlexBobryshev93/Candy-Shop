@@ -11,10 +11,14 @@ import java.util.List;
 @Data
 public class OrderDetails {
     @Id
-    //@GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderDetails", fetch = FetchType.EAGER)
+    @OneToOne
+    @JoinColumn(name = "order_id")
+    Order order;
+
+    @OneToMany(mappedBy = "orderDetails", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> items = new ArrayList<>();
 
 }

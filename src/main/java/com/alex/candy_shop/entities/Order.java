@@ -4,10 +4,6 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "orders")
@@ -23,20 +19,20 @@ public class Order {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "order_details_id")
-    private OrderDetails details;
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    private OrderDetails orderDetails = new OrderDetails();
+
+    public Order() {
+        orderDetails.setOrder(this);
+    }
 
     @PrePersist
     void createdAt() {
         this.dateTime = LocalDateTime.now();
     }
 
-    public Order() {
-        details = new OrderDetails();
-        details.setId(id);
-    }
 /*
+    @PrePersist
     void calculateSum() {
         for (int i = 0; i < products.size(); i++) {
             sum += products.get(i).getPrice() * quantities.get(i);
