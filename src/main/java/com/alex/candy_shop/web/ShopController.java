@@ -29,16 +29,13 @@ public class ShopController {
 
     @ModelAttribute(name = "order")
     public Order order() {
-        return new Order();
-    }
-
-    @ModelAttribute
-    public void addProductsToModel(Model model, @ModelAttribute Order order) {
+        Order order = new Order();
         List<Product> list = (List<Product>) productRepo.findAll();
-        model.addAttribute("products", list);
         for (Product product : list) {
             order.getOrderDetails().getItems().add(new OrderItem(product, 0));
         }
+
+        return order;
     }
 
     @GetMapping
@@ -48,7 +45,7 @@ public class ShopController {
 
     @PostMapping
     public String showCart(@ModelAttribute Order order) {
-        System.out.println();
+        System.out.println(order);
         return "cart";
     }
 }

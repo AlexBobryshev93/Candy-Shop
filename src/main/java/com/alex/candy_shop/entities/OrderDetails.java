@@ -21,4 +21,11 @@ public class OrderDetails {
     @OneToMany(mappedBy = "orderDetails", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> items = new ArrayList<>();
 
+    public OrderItem getOrderItemByProductName(String name) {
+        for (OrderItem item : items) {
+            if (item.getProduct().getName().equals(name)) return item;
+        }
+
+        return null;
+    }
 }
