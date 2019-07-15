@@ -1,6 +1,7 @@
 package com.alex.candy_shop.web;
 
 import com.alex.candy_shop.entities.Order;
+import com.alex.candy_shop.entities.OrderItem;
 import com.alex.candy_shop.entities.Product;
 import com.alex.candy_shop.repos.OrderRepo;
 import com.alex.candy_shop.repos.ProductRepo;
@@ -32,9 +33,12 @@ public class ShopController {
     }
 
     @ModelAttribute
-    public void addProductsToModel(Model model) {
+    public void addProductsToModel(Model model, @ModelAttribute Order order) {
         List<Product> list = (List<Product>) productRepo.findAll();
         model.addAttribute("products", list);
+        for (Product product : list) {
+            order.getOrderDetails().getItems().add(new OrderItem(product, 0));
+        }
     }
 
     @GetMapping
@@ -43,7 +47,8 @@ public class ShopController {
     }
 
     @PostMapping
-    public String showCart() {
+    public String showCart(@ModelAttribute Order order) {
+        System.out.println();
         return "cart";
     }
 }

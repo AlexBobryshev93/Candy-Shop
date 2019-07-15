@@ -21,4 +21,11 @@ public class OrderItem {
 
     private int quantity;
 
+    public OrderItem(Product product, int quantity) {
+        this.product = product;
+        this.quantity = quantity;
+    }
+
+    public OrderItem() {
+    }
 }
