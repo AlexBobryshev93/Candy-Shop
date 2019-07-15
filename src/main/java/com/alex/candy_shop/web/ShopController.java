@@ -32,7 +32,7 @@ public class ShopController {
         Order order = new Order();
         List<Product> list = (List<Product>) productRepo.findAll();
         for (Product product : list) {
-            order.getOrderDetails().getItems().add(new OrderItem(product, 0));
+            order.getOrderDetails().getOrderItems().add(new OrderItem(order.getOrderDetails(), product, 0));
         }
 
         return order;
@@ -45,7 +45,7 @@ public class ShopController {
 
     @PostMapping
     public String showCart(@ModelAttribute Order order) {
-        System.out.println(order);
+        order.getOrderDetails().calculateSum();
         return "cart";
     }
 }

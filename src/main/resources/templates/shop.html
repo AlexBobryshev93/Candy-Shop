@@ -8,7 +8,7 @@
 <body>
 <h1>What would you like to choose?</h1>
 <form method="POST" >
-    <div th:each="item : ${order.orderDetails.items}">
+    <div th:each="item : ${order.orderDetails.orderItems}" >
         <img th:src="${'/images/products/' + item.product.name + '.png'}" th:alt="${item.product.name}"/>
         <input type="number" min="0" th:max="${item.product.inStock}" th:action="${item.quantity}">
         </br>
@@ -17,7 +17,7 @@
         <span th:text="${item.product.getPriceForDisplay() + '$'}"></span>
         </br>
     </div>
-    <input type="image" th:src="@{/images/cart.png}" alt="To the cart"></input>
+    <input type="image" th:src="@{/images/cart.png}" alt="To the cart">
 </form>
 </body>
 </html>

@@ -16,16 +16,18 @@ public class OrderDetails {
 
     @OneToOne
     @JoinColumn(name = "order_id")
-    Order order;
+    private Order order;
 
     @OneToMany(mappedBy = "orderDetails", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<OrderItem> items = new ArrayList<>();
+    private List<OrderItem> orderItems = new ArrayList<>();
 
-    public OrderItem getOrderItemByProductName(String name) {
-        for (OrderItem item : items) {
-            if (item.getProduct().getName().equals(name)) return item;
+
+    public void calculateSum() {
+        double sum = 0;
+
+        for (OrderItem item : orderItems) {
+            sum += item.getProduct().getPrice() * item.getQuantity();
         }
-
-        return null;
+        order.setSum(sum);
     }
 }

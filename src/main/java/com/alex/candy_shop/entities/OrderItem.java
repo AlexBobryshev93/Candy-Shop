@@ -21,6 +21,12 @@ public class OrderItem {
 
     private int quantity;
 
+    public OrderItem(OrderDetails orderDetails, Product product, int quantity) {
+        this.orderDetails = orderDetails;
+        this.product = product;
+        this.quantity = quantity;
+    }
+
     public OrderItem(Product product, int quantity) {
         this.product = product;
         this.quantity = quantity;

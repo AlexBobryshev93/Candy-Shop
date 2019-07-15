@@ -12,10 +12,11 @@
         <th>Product</th>
         <th>Quantity</th>
     </tr>
-    <tr th:each="var : ${order.orderDetails.quantities}">
-        <th></th>
-        <th th:text="${var}"></th>
+    <tr th:each="item : ${order.orderDetails.orderItems}">
+        <th th:text="${item.product.name.toUpperCase()}"></th>
+        <th th:text="${item.quantity}"></th>
     </tr>
 </table>
+<h1 th:text="'Total sum: ' + ${order.sum}"></h1>
 </body>
 </html>

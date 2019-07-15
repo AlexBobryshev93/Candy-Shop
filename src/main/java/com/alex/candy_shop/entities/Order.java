@@ -31,12 +31,4 @@ public class Order {
         this.dateTime = LocalDateTime.now();
     }
 
-/*
-    @PrePersist
-    void calculateSum() {
-        for (int i = 0; i < products.size(); i++) {
-            sum += products.get(i).getPrice() * quantities.get(i);
-        }
-    } */
-
 }
