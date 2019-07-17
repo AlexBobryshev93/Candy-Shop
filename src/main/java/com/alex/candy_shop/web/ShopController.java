@@ -46,7 +46,8 @@ public class ShopController {
 
     @PostMapping
     public String showCart(@ModelAttribute Order order) {
-        order.getOrderDetails().calculateSum();
+        order.getOrderDetails().getOrderItems().removeIf(p -> p.getQuantity() == 0); // filter the products with zero quantities
+        order.getOrderDetails().calculateSum(); // still the problem with accuracy
         orderToPurchase = order;
         return "cart";
     }
