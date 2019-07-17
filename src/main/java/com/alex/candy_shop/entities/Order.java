@@ -31,4 +31,12 @@ public class Order {
         this.dateTime = LocalDateTime.now();
     }
 
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", sum=" + sum +
+                ", user=" + user +
+                '}';
+    }
 }

@@ -20,6 +20,7 @@ import java.util.List;
 public class ShopController {
     private ProductRepo productRepo;
     private OrderRepo orderRepo;
+    private Order orderToPurchase;
 
     @Autowired
     public ShopController(ProductRepo productRepo, OrderRepo orderRepo) {
@@ -46,6 +47,13 @@ public class ShopController {
     @PostMapping
     public String showCart(@ModelAttribute Order order) {
         order.getOrderDetails().calculateSum();
+        orderToPurchase = order;
         return "cart";
+    }
+
+    @PostMapping("/purchase")
+    public String purchase() {
+        orderRepo.save(orderToPurchase);
+        return "thanks";
     }
 }

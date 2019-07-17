@@ -18,5 +18,8 @@
     </tr>
 </table>
 <h1 th:text="'Total sum: ' + ${order.sum} + '$'"></h1>
+<form method="POST" th:action="@{/shop/purchase}">
+    <button>PURCHASE</button>
+</form>
 </body>
 </html>
