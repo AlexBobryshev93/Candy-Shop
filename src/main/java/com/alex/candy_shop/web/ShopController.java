@@ -51,9 +51,9 @@ public class ShopController {
         return "cart";
     }
 
-    @PostMapping("/purchase")
+    @GetMapping("/purchase")
     public String purchase() {
-        orderRepo.save(orderToPurchase);
+        //orderRepo.save(orderToPurchase);
         return "thanks";
     }
 }
