@@ -7,10 +7,10 @@
 
 <body>
 <h1>What would you like to choose?</h1>
-<form method="POST" >
-    <div th:each="item : ${order.orderDetails.orderItems}" >
+<form method="POST" th:object="${order.orderDetails}">
+    <div th:each="item, iter : *{orderItems}">
         <img th:src="${'/images/products/' + item.product.name + '.png'}" th:alt="${item.product.name}"/>
-        <input type="number" min="0" th:max="${item.product.inStock}" th:action="${item.quantity}">
+        <input type="number" min="0" th:max="${item.product.inStock}" th:field="*{orderItems[__${iter.index}__].quantity}">
         </br>
         <span th:text="${item.product.name.toUpperCase()}"></span>
         </br>
