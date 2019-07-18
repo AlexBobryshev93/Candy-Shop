@@ -25,7 +25,9 @@ public class Product {
     }
 
     // Two digits (cents) after the decimal point
-    public double getPriceForDisplay() {
-        return Math.round(price * 100) / 100d;
+    public String getPriceForDisplay() {
+        String p = String.valueOf(Math.round(price * 100) / 100d);
+        while (p.length() < 4) p = p + "0";
+        return p;
     }
 }

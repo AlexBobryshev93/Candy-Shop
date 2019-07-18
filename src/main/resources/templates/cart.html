@@ -16,10 +16,10 @@
     <tr th:each="item : ${order.orderDetails.orderItems}" th:if="${item.quantity > 0}">
         <th th:text="${item.product.name.toUpperCase()}"></th>
         <th th:text="${item.quantity}"></th>
-        <th th:text="${item.product.price}"></th>
+        <th th:text="${item.product.getPriceForDisplay()}"></th>
     </tr>
 </table>
-<h1 th:text="'Total sum: ' + ${order.sum} + '$'"></h1>
+<h1 th:text="'Total sum: ' + ${order.getSumForDisplay()} + '$'"></h1>
 <a th:href="@{/shop/purchase}">PURCHASE</a>
 <a th:href="@{/shop}">CANCEL</a>
 </body>

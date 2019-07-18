@@ -31,6 +31,13 @@ public class Order {
         this.dateTime = LocalDateTime.now();
     }
 
+
+    public String getSumForDisplay() {
+        String s = String.valueOf(Math.round(sum * 100) / 100d);
+        while (s.length() < 4) s = s + "0";
+        return s;
+    }
+
     @Override
     public String toString() {
         return "Order{" +
