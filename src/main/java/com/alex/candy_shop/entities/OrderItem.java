@@ -26,8 +26,4 @@ public class OrderItem {
         this.product = product;
         this.quantity = quantity;
     }
-
-    public OrderItem() {
-    }
-
 }

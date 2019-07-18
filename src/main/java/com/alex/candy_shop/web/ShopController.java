@@ -54,7 +54,7 @@ public class ShopController {
 
     @GetMapping("/purchase")
     @Transactional
-    public String purchase() {
+    public String purchase() { //still the issue with zero order, try validation
         orderToPurchase.getOrderDetails().getOrderItems()
                 .forEach(orderItem -> orderItem.getProduct()
                         .setInStock(orderItem.getProduct().getInStock() - orderItem.getQuantity()));
