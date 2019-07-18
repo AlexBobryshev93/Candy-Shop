@@ -7,6 +7,7 @@ import com.alex.candy_shop.repos.OrderRepo;
 import com.alex.candy_shop.repos.ProductRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,14 +47,21 @@ public class ShopController {
     @PostMapping
     public String showCart(@ModelAttribute Order order) {
         order.getOrderDetails().getOrderItems().removeIf(p -> p.getQuantity() == 0); // filter the products with zero quantities
-        order.getOrderDetails().calculateSum(); // still the problem with accuracy
+        order.getOrderDetails().calculateSum();
         orderToPurchase = order;
         return "cart";
     }
 
     @GetMapping("/purchase")
+    @Transactional
     public String purchase() {
-        //orderRepo.save(orderToPurchase);
+        orderToPurchase.getOrderDetails().getOrderItems()
+                .forEach(orderItem -> orderItem.getProduct()
+                        .setInStock(orderItem.getProduct().getInStock() - orderItem.getQuantity()));
+
+        //... money substraction
+        orderToPurchase.getOrderDetails().getOrderItems().forEach(orderItem -> productRepo.save(orderItem.getProduct()));
+        orderRepo.save(orderToPurchase);
         return "thanks";
     }
 }
