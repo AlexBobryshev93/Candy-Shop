@@ -22,7 +22,6 @@ public class ShopController {
     private OrderRepo orderRepo;
     private Order orderToPurchase;
 
-    @Autowired
     public ShopController(ProductRepo productRepo, OrderRepo orderRepo) {
         this.productRepo = productRepo;
         this.orderRepo = orderRepo;

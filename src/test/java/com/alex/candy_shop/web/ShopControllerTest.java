@@ -6,13 +6,22 @@ import com.alex.candy_shop.entities.Product;
 import com.alex.candy_shop.repos.OrderRepo;
 import com.alex.candy_shop.repos.ProductRepo;
 import org.junit.*;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.Assert.*;
 
+@RunWith(SpringRunner.class)
+@DataJpaTest
 public class ShopControllerTest {
     private ShopController shopController;
     private static Order order;
+
+    @Autowired
     private ProductRepo productRepo;
+    @Autowired
     private OrderRepo orderRepo;
 
     @BeforeClass
@@ -52,10 +61,7 @@ public class ShopControllerTest {
     @Test
     public void testPurchase() {
         shopController.showCart(order);
-        order.getOrderDetails().getOrderItems()
-                .forEach(orderItem -> orderItem.getProduct()
-                        .setInStock(orderItem.getProduct().getInStock() - orderItem.getQuantity()));
-
+        shopController.purchase();
         assertEquals(9, order.getOrderDetails().getOrderItems().get(0).getProduct().getInStock());
         assertEquals(9, order.getOrderDetails().getOrderItems().get(1).getProduct().getInStock());
     }

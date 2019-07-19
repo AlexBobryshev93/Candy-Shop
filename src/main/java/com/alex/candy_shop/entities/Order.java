@@ -31,10 +31,14 @@ public class Order {
         this.dateTime = LocalDateTime.now();
     }
 
-
     public String getSumForDisplay() {
         String s = String.valueOf(Math.round(sum * 100) / 100d);
-        while (s.length() < 4) s = s + "0";
+        int digitsBeforePoint = 0;
+        for (int i = 0; ; i++) {
+            if (s.charAt(i) == '.') break;
+            digitsBeforePoint++;
+        }
+        while ((s.length() - digitsBeforePoint - 1 ) < 2) s = s + "0";
         return s;
     }
 
