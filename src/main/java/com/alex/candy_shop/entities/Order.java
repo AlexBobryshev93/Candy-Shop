@@ -15,7 +15,7 @@ public class Order {
     private double sum;
     private LocalDateTime dateTime;
 
-    @ManyToOne(fetch = FetchType.LAZY )
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 

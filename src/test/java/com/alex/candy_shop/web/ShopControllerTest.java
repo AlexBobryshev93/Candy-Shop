@@ -53,7 +53,7 @@ public class ShopControllerTest {
     }
 
     @Test
-    @Ignore("testShowCart() was ignored because of following testing in testPurchase()")
+    @Ignore("testShowCart() was ignored because of testing in testPurchase()")
     public void testShowCart() {
         shopController.showCart(order);
     }

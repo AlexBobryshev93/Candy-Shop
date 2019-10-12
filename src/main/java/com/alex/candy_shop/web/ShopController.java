@@ -5,7 +5,6 @@ import com.alex.candy_shop.entities.OrderItem;
 import com.alex.candy_shop.entities.Product;
 import com.alex.candy_shop.repos.OrderRepo;
 import com.alex.candy_shop.repos.ProductRepo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
