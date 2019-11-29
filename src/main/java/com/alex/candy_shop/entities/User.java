@@ -16,9 +16,20 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private String firstName;
-    private String lastName;
-    private String tel;
+
+    private String username;
+    private String password;
+
+    @Transient
+    private String confirmPassword;
+
+    private double moneyBalance;
+
+    private boolean nonExpired = true;
+    private boolean accountNonLocked = true;
+    private boolean credentialsNonExpired = true;
+    private boolean enabled = true;
+
 /*
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Order> orders; */
@@ -30,31 +41,31 @@ public class User implements UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return firstName + lastName;
+        return username;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return true;
+        return nonExpired;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return accountNonLocked;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true;
+        return credentialsNonExpired;
     }
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return enabled;
     }
 }

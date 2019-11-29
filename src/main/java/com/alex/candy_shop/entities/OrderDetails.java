@@ -24,15 +24,17 @@ public class OrderDetails {
     public void calculateSum() {
         double sum = 0;
 
+        /*
         for (OrderItem item : orderItems) {
             sum += item.getProduct().getPrice() * item.getQuantity();
         }
-  /*
+        */
+
         sum = orderItems.stream()
                 .map(orderItem -> orderItem.getProduct().getPrice() * orderItem.getQuantity())
                 .reduce((acc, x) -> acc + x)
                 .get();
-*/
+
         order.setSum(sum);
     }
 }

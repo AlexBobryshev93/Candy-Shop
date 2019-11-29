@@ -20,9 +20,11 @@ public class Order {
     private User user;
 
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-    private OrderDetails orderDetails = new OrderDetails();
+    @JoinColumn(name = "order_details_id")
+    private OrderDetails orderDetails;
 
     public Order() {
+        orderDetails = new OrderDetails();
         orderDetails.setOrder(this);
     }
 

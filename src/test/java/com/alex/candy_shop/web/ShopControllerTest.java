@@ -5,6 +5,7 @@ import com.alex.candy_shop.entities.OrderItem;
 import com.alex.candy_shop.entities.Product;
 import com.alex.candy_shop.repos.OrderRepo;
 import com.alex.candy_shop.repos.ProductRepo;
+import com.alex.candy_shop.repos.UserRepo;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,8 @@ public class ShopControllerTest {
     private ProductRepo productRepo;
     @Autowired
     private OrderRepo orderRepo;
+    @Autowired
+    private UserRepo userRepo;
 
     @BeforeClass
     public static void orderCreation() {
@@ -44,7 +47,7 @@ public class ShopControllerTest {
 
     @Before
     public void setUp() throws Exception {
-        shopController = new ShopController(productRepo, orderRepo);
+        shopController = new ShopController(productRepo, orderRepo, userRepo);
     }
 
     @After
