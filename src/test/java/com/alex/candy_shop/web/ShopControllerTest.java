@@ -8,9 +8,11 @@ import com.alex.candy_shop.repos.ProductRepo;
 import com.alex.candy_shop.repos.UserRepo;
 import org.junit.*;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.ui.Model;
 
 import static org.junit.Assert.*;
 
@@ -26,6 +28,9 @@ public class ShopControllerTest {
     private OrderRepo orderRepo;
     @Autowired
     private UserRepo userRepo;
+
+    @Mock
+    private Model model;
 
     @BeforeClass
     public static void orderCreation() {
@@ -64,7 +69,7 @@ public class ShopControllerTest {
     @Test
     public void testPurchase() {
         shopController.showCart(order);
-        shopController.purchase();
+        shopController.purchase(order, model);
         assertEquals(9, order.getOrderDetails().getOrderItems().get(0).getProduct().getInStock());
         assertEquals(9, order.getOrderDetails().getOrderItems().get(1).getProduct().getInStock());
     }

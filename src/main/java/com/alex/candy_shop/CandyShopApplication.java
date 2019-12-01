@@ -36,6 +36,7 @@ public class CandyShopApplication {
                 Product kidcut = new Product("kidcut", 0.8, 5);
                 Product bouncy = new Product("bouncy", 0.9, 59);
                 Product earth = new Product("earth", 0.95, 7);
+                */
 
                 //sneakers.setInStock(1000);
                 //twins.setInStock(1000);
@@ -43,6 +44,7 @@ public class CandyShopApplication {
                 //bouncy.setInStock(1000);
                 //earth.setInStock(1000);
 
+                /*
                 productRepo.save(sneakers);
                 productRepo.save(twins);
                 productRepo.save(kidcut);

@@ -10,21 +10,17 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
 @RequestMapping("/shop")
+@SessionAttributes("order")
 public class ShopController {
     private ProductRepo productRepo;
     private OrderRepo orderRepo;
     private UserRepo userRepo;
-
-    private Order orderToPurchase;
 
     public ShopController(ProductRepo productRepo, OrderRepo orderRepo, UserRepo userRepo) {
         this.productRepo = productRepo;
@@ -32,8 +28,8 @@ public class ShopController {
         this.userRepo = userRepo;
     }
 
-    @ModelAttribute(name = "order")
-    public Order order() {
+    @GetMapping
+    public String showOrderForm(Model model) {
         Order order = new Order();
         User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         order.setUser(userRepo.findByUsername(principal.getUsername()));
@@ -43,11 +39,7 @@ public class ShopController {
             order.getOrderDetails().getOrderItems().add(new OrderItem(order.getOrderDetails(), product, 0));
         }
 
-        return order;
-    }
-
-    @GetMapping
-    public String showOrderForm() {
+        model.addAttribute("order", order);
         return "shop";
     }
 
@@ -55,29 +47,40 @@ public class ShopController {
     public String showCart(@ModelAttribute Order order) {
         order.getOrderDetails().getOrderItems().removeIf(p -> p.getQuantity() == 0); // filter the products with zero quantities
         order.getOrderDetails().calculateSum();
-        orderToPurchase = order;
+
         return "cart";
     }
 
     @GetMapping("/purchase")
     @Transactional
-    public String purchase() { //still the issue with zero order, try validation
-        // ... if not enough money
+    public String purchase(@ModelAttribute Order order, Model model) {
+        // can be replaced with the validation?
+        // empty order
+        if (order.getSum() == 0) {
+            model.addAttribute("msg", "Error! Your cart is empty");
+            return "cart";
+        }
+
+        // can be replaced with the validation?
+        // if not enough money
+        if (order.getSum() > order.getUser().getMoneyBalance()) {
+            model.addAttribute("msg", "Error! Not enough money on your balance");
+            return "cart";
+        }
 
         // products in stock subtraction
-        orderToPurchase.getOrderDetails().getOrderItems()
+        order.getOrderDetails().getOrderItems()
                 .forEach(orderItem -> orderItem.getProduct()
                         .setInStock(orderItem.getProduct().getInStock() - orderItem.getQuantity()));
 
-        System.out.println(orderToPurchase.getSum());
         // money subtraction
-        orderToPurchase.getUser().setMoneyBalance(orderToPurchase.getUser().getMoneyBalance() -
-                orderToPurchase.getSum());
+        order.getUser().setMoneyBalance(order.getUser().getMoneyBalance() -
+                order.getSum());
 
         // saving to the DB
-        orderToPurchase.getOrderDetails().getOrderItems().forEach(orderItem -> productRepo.save(orderItem.getProduct()));
-        orderRepo.save(orderToPurchase);
-        userRepo.save(orderToPurchase.getUser());
+        order.getOrderDetails().getOrderItems().forEach(orderItem -> productRepo.save(orderItem.getProduct()));
+        orderRepo.save(order);
+        userRepo.save(order.getUser());
         return "thanks";
     }
 }

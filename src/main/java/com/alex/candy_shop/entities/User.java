@@ -6,6 +6,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -19,9 +20,6 @@ public class User implements UserDetails {
 
     private String username;
     private String password;
-
-    @Transient
-    private String confirmPassword;
 
     private double moneyBalance;
 
