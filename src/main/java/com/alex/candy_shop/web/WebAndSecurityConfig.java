@@ -14,6 +14,8 @@ import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+// indentation adjustment needed in this file
+
 @Configuration
 @EnableWebSecurity
 public class WebAndSecurityConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
@@ -38,7 +40,7 @@ public class WebAndSecurityConfig extends WebSecurityConfigurerAdapter implement
             .passwordEncoder(encoder());
   }
 
-
+  // should be refactored
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http
@@ -57,5 +59,4 @@ public class WebAndSecurityConfig extends WebSecurityConfigurerAdapter implement
             .csrf()
             .ignoringAntMatchers("/cart", "/shop");
   }
-
 }

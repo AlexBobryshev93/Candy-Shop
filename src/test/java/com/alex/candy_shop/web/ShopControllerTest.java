@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 
 import static org.junit.Assert.*;
 
+// should be updated
 @RunWith(SpringRunner.class)
 @DataJpaTest
 public class ShopControllerTest {
