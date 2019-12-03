@@ -34,13 +34,16 @@ public class Order {
         this.dateTime = LocalDateTime.now();
     }
 
+    // dollars and cents format
     public String getSumForDisplay() {
         String s = String.valueOf(Math.round(sum * 100) / 100d);
         int digitsBeforePoint = 0;
+
         for (int i = 0; ; i++) {
             if (s.charAt(i) == '.') break;
             digitsBeforePoint++;
         }
+
         while ((s.length() - digitsBeforePoint - 1 ) < 2) s = s + "0";
         return s;
     }

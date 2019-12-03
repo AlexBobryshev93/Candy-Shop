@@ -14,36 +14,34 @@ import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-// indentation adjustment needed in this file
-
 @Configuration
 @EnableWebSecurity
 public class WebAndSecurityConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
-  @Autowired
-  private UserDetailsService userDetailsService;
+    @Autowired
+    private UserDetailsService userDetailsService;
 
-  @Bean
-  public PasswordEncoder encoder() {
-    return new StandardPasswordEncoder("53cr2t");
-  }
+    @Bean
+    public PasswordEncoder encoder() {
+        return new StandardPasswordEncoder("53cr2t");
+    }
 
-  @Override
-  public void addViewControllers(ViewControllerRegistry registry) {
-    registry.addViewController("/").setViewName("home");
-    //registry.addViewController("/login");
-  }
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/").setViewName("home");
+        //registry.addViewController("/login");
+    }
 
-  @Override
-  protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-    auth
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth
             .userDetailsService(userDetailsService)
             .passwordEncoder(encoder());
-  }
+    }
 
-  // should be refactored
-  @Override
-  protected void configure(HttpSecurity http) throws Exception {
-    http
+    // should be refactored
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
             .authorizeRequests()
             //.antMatchers("/register").permitAll()
             .antMatchers("/").access("hasRole('ROLE_USER')")
@@ -58,5 +56,5 @@ public class WebAndSecurityConfig extends WebSecurityConfigurerAdapter implement
             .and()
             .csrf()
             .ignoringAntMatchers("/cart", "/shop");
-  }
+    }
 }

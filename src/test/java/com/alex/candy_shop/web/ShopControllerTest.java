@@ -3,52 +3,63 @@ package com.alex.candy_shop.web;
 import com.alex.candy_shop.entities.Order;
 import com.alex.candy_shop.entities.OrderItem;
 import com.alex.candy_shop.entities.Product;
+import com.alex.candy_shop.entities.User;
 import com.alex.candy_shop.repos.OrderRepo;
 import com.alex.candy_shop.repos.ProductRepo;
 import com.alex.candy_shop.repos.UserRepo;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.ui.Model;
 
 import static org.junit.Assert.*;
 
-// should be updated
 @RunWith(SpringRunner.class)
-@DataJpaTest
+@SpringBootTest
 public class ShopControllerTest {
-    private ShopController shopController;
     private static Order order;
-
-    @Autowired
-    private ProductRepo productRepo;
-    @Autowired
-    private OrderRepo orderRepo;
-    @Autowired
-    private UserRepo userRepo;
+    private static User user;
+    private ShopController shopController;
 
     @Mock
     private Model model;
+    @Mock
+    private ProductRepo productRepo;
+    @Mock
+    private OrderRepo orderRepo;
+    @Mock
+    private UserRepo userRepo;
 
     @BeforeClass
     public static void orderCreation() {
+        user = new User();
         order = new Order();
-        order.getOrderDetails()
-                .getOrderItems()
-                .add(new OrderItem(order.getOrderDetails(), new Product("product1", 1.1, 10), 1));
+        order.setUser(user);
+
+        user.setUsername("test");
+        user.setPassword("test");
+        user.setMoneyBalance(200);
 
         order.getOrderDetails()
                 .getOrderItems()
-                .add(new OrderItem(order.getOrderDetails(), new Product("product2", 1.1, 10), 1));
+                .add(new OrderItem(order.getOrderDetails(),
+                        new Product("product1", 1.1, 10),
+                        1)
+                );
 
+        order.getOrderDetails()
+                .getOrderItems()
+                .add(new OrderItem(order.getOrderDetails(),
+                        new Product("product2", 1.1, 10), 1)
+                );
     }
 
     @AfterClass
     public static void shutdown() {
         order = null;
+        user = null;
     }
 
     @Before
@@ -73,6 +84,7 @@ public class ShopControllerTest {
         shopController.purchase(order, model);
         assertEquals(9, order.getOrderDetails().getOrderItems().get(0).getProduct().getInStock());
         assertEquals(9, order.getOrderDetails().getOrderItems().get(1).getProduct().getInStock());
+        assertEquals(197.8, order.getUser().getMoneyBalance(), 0.05);
     }
 
 }

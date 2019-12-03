@@ -20,7 +20,7 @@
     </tr>
 </table>
 <h1 th:text="'Total sum: ' + ${order.getSumForDisplay()} + '$'"></h1>
-<i th:text="${msg}"></i><br>
+<i th:text="${msg}" style="color: red"></i><br>
 <a th:href="@{/shop/purchase}">PURCHASE</a>
 <a th:href="@{/shop}">CANCEL</a>
 </body>
