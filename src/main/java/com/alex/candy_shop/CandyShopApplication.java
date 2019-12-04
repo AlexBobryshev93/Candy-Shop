@@ -12,7 +12,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-//Add User info as the page header?
+// Add User info and logout button as the page header?
+// Add custom Error500 page?
+// Beautify with CSS?
 @SpringBootApplication
 public class CandyShopApplication {
     @Autowired

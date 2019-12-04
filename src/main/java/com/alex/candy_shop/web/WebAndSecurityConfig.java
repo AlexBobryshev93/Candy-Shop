@@ -1,7 +1,6 @@
 package com.alex.candy_shop.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -28,7 +27,6 @@ public class WebAndSecurityConfig extends WebSecurityConfigurerAdapter implement
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("home");
-        //registry.addViewController("/login");
     }
 
     @Override
@@ -38,23 +36,20 @@ public class WebAndSecurityConfig extends WebSecurityConfigurerAdapter implement
             .passwordEncoder(encoder());
     }
 
-    // should be refactored
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-            //.antMatchers("/register").permitAll()
-            .antMatchers("/").access("hasRole('ROLE_USER')")
+                .antMatchers("/").permitAll()
+                .antMatchers("/shop", "/shop/purchase").access("hasRole('ROLE_USER')")
             .and()
             .formLogin()
-            //.loginPage("/login")
-            .defaultSuccessUrl("/")
-            //.and()
-            //.logout()
-            //.logoutUrl("/logout")
-            //.logoutSuccessUrl("/login")
+            .and()
+            .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login")
             .and()
             .csrf()
-            .ignoringAntMatchers("/cart", "/shop");
+                .ignoringAntMatchers("/shop");
     }
 }
