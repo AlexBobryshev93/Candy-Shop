@@ -7,14 +7,6 @@ import static org.junit.Assert.*;
 public class ProductTest {
     private Product product;
 
-    @BeforeClass
-    public static void prepare() throws Exception {
-    }
-
-    @AfterClass
-    public static void finish() throws Exception {
-    }
-
     @Before
     public void setUp() throws Exception {
         product = new Product();
