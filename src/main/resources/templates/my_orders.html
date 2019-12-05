@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>My Candy Shop Online</title>
+</head>
+
+<body>
+<div>
+    <a th:text="'Username: ' + ${user.getUsername()}"></a>
+    <br/>
+    <a th:text="'Money balance: ' + ${user.getMoneyBalance()} + '$'"></a>
+    <form method="POST" th:action="@{/logout}">
+        <input type="submit" value="Log out"/>
+    </form>
+</div>
+<hr/>
+
+<h1>Your orders:</h1>
+<div th:each="order : ${orders}">
+    <p th:text="'id: ' + ${order.getId()}"></p>
+    <table>
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Price($)</th>
+        </tr>
+        <tr th:each="item : ${order.getOrderDetails().getOrderItems()}" th:if="${item.getQuantity() > 0}">
+            <th th:text="${item.getProduct().getName().toUpperCase()}"></th>
+            <th th:text="${item.getQuantity()}"></th>
+            <th th:text="${item.getProduct().getPriceForDisplay()}"></th>
+        </tr>
+    </table>
+    <p th:text="'Total sum: ' + ${order.getSumForDisplay()} + '$'"></p>
+    <br/>
+</div>
+<br/>
+
+<a th:href="@{/shop}">back to the shop</a>
+</body>
+</html>

@@ -9,7 +9,9 @@
 <div>
     <a th:text="'Username: ' + ${user.getUsername()}"></a>
     <br/>
-    <a th:text="'Money balance: ' + ${user.getMoneyBalance()}"></a>
+    <a th:text="'Money balance: ' + ${user.getMoneyBalance() + '$'}"></a>
+    <br/>
+    <a th:href="@{/my_orders}">MY ORDERS</a>
     <form method="POST" th:action="@{/logout}">
         <input type="submit" value="Log out"/>
     </form>
