@@ -6,6 +6,16 @@
 </head>
 
 <body>
+<div>
+    <a th:text="'Username: ' + ${user.getUsername()}"></a>
+    <br/>
+    <a th:text="'Money balance: ' + ${user.getMoneyBalance()}"></a>
+    <form method="POST" th:action="@{/logout}">
+        <input type="submit" value="Log out"/>
+    </form>
+</div>
+<hr/>
+
 <h1>What would you like to choose?</h1>
 <form method="POST" th:object="${order.orderDetails}">
     <div th:each="item, iter : *{orderItems}">

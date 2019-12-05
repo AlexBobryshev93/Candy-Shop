@@ -16,7 +16,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/shop")
-@SessionAttributes("order")
+@SessionAttributes({"order", "user"})
 public class ShopController {
     private ProductRepo productRepo;
     private OrderRepo orderRepo;
@@ -40,6 +40,7 @@ public class ShopController {
         }
 
         model.addAttribute("order", order);
+        model.addAttribute("user", userRepo.findByUsername(principal.getUsername()));
         return "shop";
     }
 

@@ -6,6 +6,16 @@
 </head>
 
 <body>
+<div>
+    <a th:text="'Username: ' + ${user.getUsername()}"></a>
+    <br/>
+    <a th:text="'Money balance: ' + ${user.getMoneyBalance()}"></a>
+    <form method="POST" th:action="@{/logout}">
+        <input type="submit" value="Log out"/>
+    </form>
+</div>
+<hr/>
+
 <h1>Here is your cart:</h1>
 <table>
     <tr>
