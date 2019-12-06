@@ -9,7 +9,7 @@
 <div>
     <a th:text="'Username: ' + ${user.getUsername()}"></a>
     <br/>
-    <a th:text="'Money balance: ' + ${user.getMoneyBalance()} + '$'"></a>
+    <a th:text="'Money balance: ' + ${user.getMoneyForDisplay()} + '$'"></a>
     <form method="POST" th:action="@{/logout}">
         <input type="submit" value="Log out"/>
     </form>
@@ -18,7 +18,8 @@
 
 <h1>Your orders:</h1>
 <div th:each="order : ${orders}">
-    <p th:text="'id: ' + ${order.getId()}"></p>
+    <p th:text="'ID: ' + ${order.getId()}"></p>
+    <p th:text="'Created at: ' + ${order.getDateTime()}"></p>
     <table>
         <tr>
             <th>Product</th>

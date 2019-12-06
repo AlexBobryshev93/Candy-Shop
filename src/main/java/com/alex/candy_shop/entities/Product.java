@@ -1,5 +1,6 @@
 package com.alex.candy_shop.entities;
 
+import com.alex.candy_shop.util.Utils;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -24,15 +25,8 @@ public class Product {
         this.inStock = inStock;
     }
 
-    // Two digits (cents) after the decimal point
+    // Two digits (cents) after the decimal point format
     public String getPriceForDisplay() {
-        String p = String.valueOf(Math.round(price * 100) / 100d);
-        int digitsBeforePoint = 0;
-        for (int i = 0; ; i++) {
-            if (p.charAt(i) == '.') break;
-            digitsBeforePoint++;
-        }
-        while ((p.length() - digitsBeforePoint - 1 ) < 2) p = p + "0";
-        return p;
+        return Utils.moneyToDisplay(price);
     }
 }

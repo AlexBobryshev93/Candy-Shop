@@ -1,5 +1,6 @@
 package com.alex.candy_shop.entities;
 
+import com.alex.candy_shop.util.Utils;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -65,5 +66,10 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return enabled;
+    }
+
+    // Two digits (cents) after the decimal point format
+    public String getMoneyForDisplay() {
+        return Utils.moneyToDisplay(moneyBalance);
     }
 }
