@@ -1,0 +1,9 @@
+<div xmlns:th="http://www.thymeleaf.org">
+    <span th:text="'Username: ' + ${user.getUsername()}"></span>
+    <br/>
+    <span th:text="'Money balance: ' + ${user.getMoneyForDisplay()} + '$'"></span>
+    <form method="POST" th:action="@{/logout}">
+        <input type="submit" value="Log out" class="logout"/>
+    </form>
+    <br/>
+</div>

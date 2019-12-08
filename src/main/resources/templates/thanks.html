@@ -7,19 +7,13 @@
 </head>
 
 <body>
-<div>
-    <a th:text="'Username: ' + ${user.getUsername()}"></a>
-    <br/>
-    <a th:text="'Money balance: ' + ${user.getMoneyForDisplay() + '$'}"></a>
-    <br/>
-    <a th:href="@{/my_orders}">MY ORDERS</a>
-    <form method="POST" th:action="@{/logout}">
-        <input type="submit" value="Log out"/>
-    </form>
-</div>
+<th:block th:include="/_user_info"></th:block>
+<a th:href="@{/my_orders}">MY ORDERS</a>
+<br/>
 <hr/>
 
-<h1>Thank you! Your order is now in process...</h1>
-<a th:href="@{/}">To the home page</a>
+<h1>Thank you! Your order is now on the way...</h1>
+<a th:href="@{/}">TO THE HOME PAGE</a>
+<th:block th:include="/_footer"></th:block>
 </body>
 </html>

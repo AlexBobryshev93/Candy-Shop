@@ -7,24 +7,17 @@
 </head>
 
 <body>
-<div>
-    <a th:text="'Username: ' + ${user.getUsername()}"></a>
-    <br/>
-    <a th:text="'Money balance: ' + ${user.getMoneyForDisplay() + '$'}"></a>
-    <br/>
-    <a th:href="@{/my_orders}">MY ORDERS</a>
-    <form method="POST" th:action="@{/logout}">
-        <input type="submit" value="Log out"/>
-    </form>
-</div>
+<th:block th:include="/_user_info"></th:block>
+<a th:href="@{/my_orders}">MY ORDERS</a>
+<br/>
 <hr/>
 
 <h1>Here is your cart:</h1>
 <table>
     <tr>
-        <th>Product</th>
-        <th>Quantity</th>
-        <th>Price($)</th>
+        <td>Product</td>
+        <td>Quantity</td>
+        <td>Price($)</td>
     </tr>
     <tr th:each="item : ${order.orderDetails.orderItems}" th:if="${item.quantity > 0}">
         <th th:text="${item.product.name.toUpperCase()}"></th>
@@ -33,8 +26,9 @@
     </tr>
 </table>
 <h1 th:text="'Total sum: ' + ${order.getSumForDisplay()} + '$'"></h1>
-<i th:text="${msg}" class="error"></i><br>
+<i th:text="${msg}" class="msg"></i><br>
 <a th:href="@{/shop/purchase}">PURCHASE</a>
 <a th:href="@{/shop}">CANCEL</a>
+<th:block th:include="/_footer"></th:block>
 </body>
 </html>

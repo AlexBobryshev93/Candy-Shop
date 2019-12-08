@@ -7,27 +7,19 @@
 </head>
 
 <body>
-<div>
-    <a th:text="'Username: ' + ${user.getUsername()}"></a>
-    <br/>
-    <a th:text="'Money balance: ' + ${user.getMoneyForDisplay()} + '$'"></a>
-    <form method="POST" th:action="@{/logout}">
-        <input type="submit" value="Log out"/>
-    </form>
-    <br/>
-    <a th:href="@{/shop}">back to the shop</a>
-</div>
+<th:block th:include="/_user_info"></th:block>
+<a th:href="@{/shop}">BACK TO THE SHOP</a>
+<br/>
 <hr/>
 
 <h1>Your orders:</h1>
 <div th:each="order : ${orders}">
-    <p th:text="'ID: ' + ${order.getId()}"></p>
-    <p th:text="'Created at: ' + ${order.getDateTime()}"></p>
+    <p th:text="'ID: ' + ${order.getId()}" class="id-text"></p>
     <table>
         <tr>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th>Price($)</th>
+            <td>Product</td>
+            <td>Quantity</td>
+            <td>Price($)</td>
         </tr>
         <tr th:each="item : ${order.getOrderDetails().getOrderItems()}" th:if="${item.getQuantity() > 0}">
             <th th:text="${item.getProduct().getName().toUpperCase()}"></th>
@@ -35,10 +27,10 @@
             <th th:text="${item.getProduct().getPriceForDisplay()}"></th>
         </tr>
     </table>
-    <p th:text="'Total sum: ' + ${order.getSumForDisplay()} + '$'"></p>
+    <p th:text="'Created at: ' + ${order.getDateTime()}" class="order-property"></p>
+    <p th:text="'Total sum: ' + ${order.getSumForDisplay()} + '$'" class="order-property"></p>
     <br/>
 </div>
-<br/>
-
+<th:block th:include="/_footer"></th:block>
 </body>
 </html>
