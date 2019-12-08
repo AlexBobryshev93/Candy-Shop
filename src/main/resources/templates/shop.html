@@ -3,6 +3,7 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>My Candy Shop Online</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -24,14 +25,14 @@
         <img th:src="${'/images/products/' + item.product.name + '.png'}" th:alt="${item.product.name}"/>
         <input type="number" min="0" th:max="${item.product.inStock}"
                th:field="*{orderItems[__${iter.index}__].quantity}" required>
-        <span th:if="${item.product.inStock == 0}" style="color: red">Not available yet</span>
+        <span th:if="${item.product.inStock == 0}" class="error">Not available yet</span>
         </br>
         <span th:text="${item.product.name.toUpperCase()}"></span>
         </br>
         <span th:text="${item.product.getPriceForDisplay() + '$'}"></span>
         </br></br>
     </div>
-    <input type="image" th:src="@{/images/cart.png}" style="display: block; margin: 0 auto;" alt="To the cart">
+    <input type="image" th:src="@{/images/cart.png}" class="buttonimg" alt="To the cart">
 </form>
 </body>
 </html>

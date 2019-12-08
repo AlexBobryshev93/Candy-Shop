@@ -3,6 +3,7 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>My Candy Shop Online</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -32,7 +33,7 @@
     </tr>
 </table>
 <h1 th:text="'Total sum: ' + ${order.getSumForDisplay()} + '$'"></h1>
-<i th:text="${msg}" style="color: red"></i><br>
+<i th:text="${msg}" class="error"></i><br>
 <a th:href="@{/shop/purchase}">PURCHASE</a>
 <a th:href="@{/shop}">CANCEL</a>
 </body>
