@@ -5,6 +5,8 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 @Entity
 @Table(name = "orders")
@@ -47,6 +49,11 @@ public class Order {
     // Two digits (cents) after the decimal point format
     public String getSumForDisplay() {
         return Utils.moneyToDisplay(sum);
+    }
+
+    public String getDateTimeForDisplay() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm, dd MMM uuuu", Locale.ENGLISH);
+        return dateTime.format(formatter);
     }
 
     @Override

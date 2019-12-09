@@ -27,7 +27,7 @@
             <th th:text="${item.product.getPriceForDisplay()}"></th>
         </tr>
     </table>
-    <p th:text="'Created at: ' + ${order.dateTime}" class="order-property"></p>
+    <p th:text="'Created at: ' + ${order.getDateTimeForDisplay()}" class="order-property"></p>
     <p th:text="'Total sum: ' + ${order.getSumForDisplay()} + '$'" class="order-property"></p>
     <br/>
 </div>
