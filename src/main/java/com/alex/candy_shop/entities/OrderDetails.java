@@ -20,17 +20,4 @@ public class OrderDetails {
 
     @OneToMany(mappedBy = "orderDetails", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> orderItems = new ArrayList<>();
-
-    public void calculateSum() {
-        double sum = 0;
-
-        if (!orderItems.isEmpty()) {
-            sum = orderItems.stream()
-                    .map(orderItem -> orderItem.getProduct().getPrice() * orderItem.getQuantity())
-                    .reduce((acc, x) -> acc + x)
-                    .get();
-        }
-
-        order.setSum(sum);
-    }
 }

@@ -31,7 +31,7 @@ public class OrderDetailsTest {
                         new Product("product2", 1.1, 10), 1)
                 );
 
-        order.getOrderDetails().calculateSum();
+        order.calculateSum();
 
         assertEquals(2.2, order.getOrderDetails().getOrder().getSum(), 0);
     }

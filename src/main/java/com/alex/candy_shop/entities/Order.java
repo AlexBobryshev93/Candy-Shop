@@ -35,6 +35,15 @@ public class Order {
         this.dateTime = LocalDateTime.now();
     }
 
+    public void calculateSum() {
+        if (!orderDetails.getOrderItems().isEmpty()) {
+            sum = orderDetails.getOrderItems().stream()
+                    .map(orderItem -> orderItem.getProduct().getPrice() * orderItem.getQuantity())
+                    .reduce((acc, x) -> acc + x)
+                    .get();
+        }
+    }
+
     // Two digits (cents) after the decimal point format
     public String getSumForDisplay() {
         return Utils.moneyToDisplay(sum);

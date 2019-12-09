@@ -27,7 +27,7 @@ public class OrderTest {
                 .getOrderItems()
                 .add(new OrderItem(order.getOrderDetails(), new Product("product2", 1.1, 10), 1));
 
-        order.getOrderDetails().calculateSum();
+        order.calculateSum();
         assertEquals("2.20", order.getSumForDisplay());
     }
 }
