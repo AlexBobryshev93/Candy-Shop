@@ -27,6 +27,7 @@ public class OrderItem {
         this.quantity = quantity;
     }
 
+    // for Thymeleaf
     public OrderItem() {
     }
 }

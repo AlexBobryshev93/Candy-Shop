@@ -52,8 +52,7 @@ public class Order {
     }
 
     public String getDateTimeForDisplay() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm, dd MMM uuuu", Locale.ENGLISH);
-        return dateTime.format(formatter);
+        return dateTime.format(DateTimeFormatter.ofPattern("HH:mm, dd MMM uuuu", Locale.ENGLISH));
     }
 
     @Override

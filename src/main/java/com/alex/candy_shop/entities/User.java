@@ -21,7 +21,6 @@ public class User implements UserDetails {
     private String username;
     private String password;
 
-    // 0.1 issue might occur
     private double moneyBalance;
 
     private boolean nonExpired = true;
