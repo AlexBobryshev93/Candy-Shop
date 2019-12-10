@@ -55,17 +55,16 @@ public class ShopController {
     @GetMapping("/purchase")
     @Transactional
     public String purchase(@ModelAttribute Order order, Model model) {
-        // can be replaced with the validation?
-        // empty order
-        if (order.getSum() == 0) {
-            model.addAttribute("msg", "Error! Your cart is empty");
-            return "cart";
-        }
+        try {
+            if (order.getSum() == 0) {
+                throw new RuntimeException("Error! Your cart is empty");
+            }
 
-        // can be replaced with the validation?
-        // if not enough money
-        if (order.getSum() > order.getUser().getMoneyBalance()) {
-            model.addAttribute("msg", "Error! Not enough money on your balance");
+            if (order.getSum() > order.getUser().getMoneyBalance()) {
+                throw new RuntimeException("Error! Not enough money on your balance");
+            }
+        } catch (RuntimeException exc) {
+            model.addAttribute("msg", exc.getMessage());
             return "cart";
         }
 

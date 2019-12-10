@@ -1,9 +1,9 @@
-#Candy Shop
+# Candy Shop
 
 ## Tutorial
 A learning project - Online shop application.
 
-###Technologies used:
+### Technologies used:
 * Java 8
 * Spring Framework (Core, Boot, MVC, Data, Security)
 * PostgreSQL
@@ -40,6 +40,9 @@ Also you may do the same from your IDE.
 
 **4. Use the application as you wish**
 
+Now you can access the application at http://localhost:8080/ in your browser
+(port number can be changed in `src/main/resources/application.properties`).
+
 The application will require authentication. Use username
 `user1` and password `pass` as the credentials. This default account has
 some amount of money and gives an opportunity to test the
@@ -54,7 +57,7 @@ application. Alternatively, it can be done with SQL directly in the database
 (password encryption should be considered in this case, the encoder can be 
 found in `WebAndSecurityConfig` class).
 
-###Disclaimer
+### Disclaimer
 This application was developed for learning purposes and doesn't consider some
 aspects of real online shops, among those are:
 
