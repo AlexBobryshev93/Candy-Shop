@@ -18,7 +18,7 @@ public class OrderTest {
     }
 
     @Test
-    public void testGetSumForDisplay() {
+    public void testCalculateSum() {
         order.getOrderDetails()
                 .getOrderItems()
                 .add(new OrderItem(order.getOrderDetails(), new Product("product1", 1.1, 10), 1));
@@ -28,6 +28,6 @@ public class OrderTest {
                 .add(new OrderItem(order.getOrderDetails(), new Product("product2", 1.1, 10), 1));
 
         order.calculateSum();
-        assertEquals("2.20", order.getSumForDisplay());
+        assertEquals(2.20, order.getSum(), 0.005);
     }
 }
