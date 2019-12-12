@@ -22,8 +22,7 @@ public class Order {
     @JoinColumn(name = "user_id")
     private User user;
 
-    // still not shown in DB
-    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "order_details_id")
     private OrderDetails orderDetails;
 
